@@ -6,10 +6,9 @@ use \Psr\Http\Message\ResponseInterface as Response;
 require '../vendor/autoload.php';
 
 $app = new \Slim\App;
-$app->get('/', function (Request $request, Response $response, array $args) {
-    $response->getBody()->write("Hello, first");
+$app->get('/api', function (Request $request, Response $response, array $args) {
 
-    return $response;
+    return $response->withJson(['massage' => 'hello']);
 });
 
 
