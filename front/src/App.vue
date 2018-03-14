@@ -1,28 +1,30 @@
 <template>
   <div id="app">
-    <img src="./assets/logo.png">
-    <HelloWorld/>
+    <edit-form></edit-form>
+    <tag-list></tag-list>
+    <post-item-list></post-item-list>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld'
+import EditForm from './components/EditForm';
+import PostItemList from './components/PostItemList';
+import TagList from './components/TagList';
 
 export default {
   name: 'App',
   components: {
-    HelloWorld
+    EditForm,
+    PostItemList,
+    TagList,
   }
 }
 </script>
 
 <style>
-#app {
+#app * {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
 }
 </style>
