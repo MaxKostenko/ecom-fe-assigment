@@ -1,30 +1,62 @@
 <template>
   <div id="app">
-    <edit-form></edit-form>
-    <tag-list></tag-list>
-    <post-item-list></post-item-list>
+    <header>
+      <h1>My Spectacular Blog</h1>
+      <p>A totally false statement</p>
+    </header>
+    <section>
+      <edit-form></edit-form>
+      <blog-content></blog-content>
+    </section>
   </div>
 </template>
 
 <script>
-import EditForm from './components/EditForm';
-import PostItemList from './components/PostItemList';
-import TagList from './components/TagList';
+import EditForm from '@/components/EditForm';
+import BlogContent from '@/components/BlogContent';
 
 export default {
   name: 'App',
   components: {
     EditForm,
-    PostItemList,
-    TagList,
+    BlogContent
   }
 }
 </script>
 
 <style>
-#app * {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
+  * {
+    padding: 0;
+    margin: 0;
+    font-family: 'Avenir', Helvetica, Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    box-sizing: border-box;
+
+  }
+
+  body {
+    background-color: #F6F6F6;
+  }
+
+  #app {
+    width: 75%;
+    margin: auto;
+    background-color: white;
+    min-height: 100vh;
+
+  }
+
+  header {
+    height: 200px;
+    text-align: center;
+    padding: 30px;
+  }
+
+  header p {
+    margin-top: 20px;
+    font-style: italic;
+  }
+
+
 </style>
