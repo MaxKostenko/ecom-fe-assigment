@@ -1,35 +1,38 @@
 <template>
   <form action="#" @submit.stop.prevent="sendForm">
     <edit-form-layer>
-      <submit-button slot="action"></submit-button>
-      <form-field-holder-vuelidate
-        :validator="$v.title"
-      >
-        <input
-          v-model="title"
-          type="text"
-          placeholder="Input Title"
-        />
-      </form-field-holder-vuelidate>
+      <form-button type="submit" slot="action">Send Form</form-button>
+      <template slot="fields">
+        <form-field-holder-vuelidate
+            :validator="$v.title"
+        >
+          <input
+              v-model="title"
+              type="text"
+              placeholder="Input Title"
+          />
+        </form-field-holder-vuelidate>
 
-      <form-field-holder-vuelidate
-        :validator="$v.text"
-      >
+        <form-field-holder-vuelidate
+            :validator="$v.text"
+        >
           <textarea
-            v-model="text"
-            placeholder="Input text"
+              v-model="text"
+              placeholder="Input text"
           ></textarea>
-      </form-field-holder-vuelidate>
+        </form-field-holder-vuelidate>
 
-      <form-field-holder-vuelidate
-        :validator="$v.author"
-      >
-        <input
-          v-model="author"
-          type="text"
-          placeholder="Input author Email"
-        />
-      </form-field-holder-vuelidate>
+        <form-field-holder-vuelidate
+            :validator="$v.author"
+        >
+          <input
+              v-model="author"
+              type="text"
+              placeholder="Input author Email"
+          />
+        </form-field-holder-vuelidate>
+        <file-upload-field></file-upload-field>
+      </template>
     </edit-form-layer>
 
   </form>
@@ -37,7 +40,8 @@
 
 <script>
   import FormFieldHolderVuelidate from '@/components/EditForm/FormFieldHolderVuelidate';
-  import SubmitButton from '@/components/EditForm/SubmitButton';
+  import FormButton from '@/components/EditForm/FormButton';
+  import FileUploadField from '@/components/EditForm/FileUploadField';
   import EditFormLayer from '@/components/EditForm/EditFormLayer';
   import {validationMixin} from 'vuelidate';
   import {required, email} from 'vuelidate/lib/validators';
@@ -46,8 +50,9 @@
     name: 'edit-form',
     components: {
       FormFieldHolderVuelidate,
-      SubmitButton,
-      EditFormLayer
+      FormButton,
+      EditFormLayer,
+      FileUploadField,
     },
     data() {
       return {

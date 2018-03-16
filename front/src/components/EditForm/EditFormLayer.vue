@@ -1,9 +1,9 @@
-<template>
+<template functional>
   <div class="holder">
     <h3>New Blog Post</h3>
     <div class="form">
         <div class="form-fields">
-          <slot></slot>
+          <slot name="fields"></slot>
         </div>
         <div class="form-action">
           <slot name="action"></slot>
@@ -21,7 +21,7 @@
   }
 
   .form {
-    margin: 40px 0 40px 0;
+    margin: 10px 0 10px 0;
     display: inline-block;
     width: 100%;
   }
@@ -40,5 +40,18 @@
     width: 25%;
     padding: 0 10px 0 40px;
   }
+
+  @media (max-width: 1024px) {
+      .form-fields {
+          width: 100%;
+      }
+
+      .form-action {
+          width: 100%;
+          padding: 0;
+      }
+
+  }
+
 
 </style>

@@ -19,7 +19,7 @@
       PostItemList,
       TagList,
     },
-  }
+  };
 </script>
 
 <style scoped>
@@ -37,6 +37,15 @@
   .posts {
     float: left;
     width: 75%;
+  }
+
+  @media (max-width: 1024px) {
+    .tags {
+      width: 100%;
+    }
+    .posts {
+      width: 100%;
+    }
   }
 
 </style>

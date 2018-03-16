@@ -44,7 +44,14 @@ export default {
     margin: auto;
     background-color: white;
     min-height: 100vh;
+    min-width: 640px;
 
+  }
+
+  @media (max-width: 1024px) {
+    #app {
+      width: 100%;
+    }
   }
 
   header {

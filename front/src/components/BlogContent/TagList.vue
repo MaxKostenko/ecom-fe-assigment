@@ -1,6 +1,15 @@
 <template>
   <div class="holder">
-    <div class="list">I am TagList</div>
+    <div class="list">
+      <h4>Most used words here</h4>
+      <ul>
+        <li>word 1</li>
+        <li>word 2</li>
+        <li>word 3</li>
+        <li>word 4</li>
+        <li>word 5</li>
+      </ul>
+    </div>
   </div>
 </template>
 
@@ -15,10 +24,59 @@
     width: 100%;
     padding: 20px 20px 20px 0;
   }
+
+
   .list {
     border: 1px solid #444;
     border-radius: 10px;
     padding: 20px;
     min-height: 150px;
+  }
+
+  .list ul {
+    margin-left: 30px;
+  }
+
+  @media (max-width: 1024px) {
+    .list {
+      border: 0;
+      min-height: initial;
+    }
+
+    .holder {
+      padding: 0 20px 0 20px;
+      display: inline-block;
+      width: 100%;
+    }
+
+    .list h4 {
+      float: left;
+      width: 180px;
+      margin-right: -180px;
+    }
+
+    .list ul {
+      float: left;
+      padding-left: 180px;
+      width: 100%;
+      margin: 0;
+
+    }
+
+    .list h4:after {
+      content: ':';
+    }
+
+    .list li {
+      display: inline;
+    }
+
+    .list li:after {
+      content: ',';
+    }
+
+    .list li:last-child:after {
+      content: '';
+    }
   }
 </style>
