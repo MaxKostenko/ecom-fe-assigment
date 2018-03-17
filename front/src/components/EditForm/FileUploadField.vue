@@ -16,7 +16,7 @@
 </template>
 
 <script>
-  import FormButton from '@/components/EditForm/FormButton';
+  import FormButton from '@/components/base/FormButton';
 
   export default {
     name: 'file-upload-field',

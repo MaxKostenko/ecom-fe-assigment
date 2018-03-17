@@ -42,11 +42,13 @@
 
 <script>
   import FormFieldHolderVuelidate from '@/components/EditForm/FormFieldHolderVuelidate';
-  import FormButton from '@/components/EditForm/FormButton';
+  import FormButton from '@/components/base/FormButton';
   import FileUploadField from '@/components/EditForm/FileUploadField';
   import EditFormLayer from '@/components/EditForm/EditFormLayer';
   import {validationMixin} from 'vuelidate';
   import {required, email} from 'vuelidate/lib/validators';
+  import SendForm from '@/components/base/SendForm';
+
   export default {
     mixins: [validationMixin],
     name: 'edit-form',
@@ -80,8 +82,11 @@
       sendForm() {
         this.$v.$touch();
         if (!this.$v.$invalid) {
-          console.dir({
-            ...this.$data,
+          SendForm(
+            '/api',
+            {...this.$data}
+          ).then((response) => {
+            alert('done');
           });
         }
       }

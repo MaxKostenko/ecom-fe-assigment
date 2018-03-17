@@ -6,6 +6,10 @@ use \Psr\Http\Message\ResponseInterface as Response;
 require '../vendor/autoload.php';
 
 $app = new \Slim\App;
+$app->post( '/api', function (Request $request, Response $response, array $args) {
+
+});
+
 $app->get('/api', function (Request $request, Response $response, array $args) {
 
     return $response->withJson(
@@ -22,46 +26,46 @@ $app->get('/api', function (Request $request, Response $response, array $args) {
                     'title' => 'post title',
                     'text' => 'some super test 7',
                     'email' => 'test_user@mimi.com',
+                    'time' => '12:34:00',
                 ],
                 [
                     'title' => 'post title hallo',
                     'text' => 'some super test 6',
                     'email' => 'test_user@mimi.com',
+                    'time' => '12:30:00',
                 ],
                 [
                     'title' => 'post title vallo',
                     'text' => 'some super test 5',
                     'email' => 'test_user@mimi.com',
+                    'time' => '12:24:00',
                 ],
                 [
                     'title' => 'post title shallo',
                     'text' => 'some super test 4',
                     'email' => 'test_user@mimi.com',
+                    'time' => '12:14:00',
                 ],
                 [
                     'title' => 'post title sallo',
                     'text' => 'some super test 3',
                     'email' => 'test_user@mimi.com',
+                    'time' => '12:10:00',
                 ],
                 [
                     'title' => 'post title kallo',
                     'text' => 'some super test 2',
                     'email' => 'test_user@mimi.com',
+                    'time' => '12:04:00',
                 ],
                 [
                     'title' => 'post title tallo',
                     'text' => 'some super test 1',
                     'email' => 'test_user@mimi.com',
+                    'time' => '12:01:00',
                 ],
             ]
         ]);
 });
 
-
-$app->get('/hello/{name}', function (Request $request, Response $response, array $args) {
-    $name = $args['name'];
-    $response->getBody()->write("Hello, $name");
-
-    return $response;
-});
 $app->run();

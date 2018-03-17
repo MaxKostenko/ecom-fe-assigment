@@ -1,24 +1,19 @@
-<template>
-  <div class="holder">
-    <post-item></post-item>
-    <post-item></post-item>
-    <post-item></post-item>
-    <post-item></post-item>
-    <post-item></post-item>
-  </div>
-</template>
-
 <script>
   import PostItem from '@/components/BlogContent/PostItem';
 
   export default {
-    name: 'post-item-list',
-    components: {PostItem},
+    functional: true,
+    render(createElement, context) {
+
+      return context.props.posts.map((post) => {
+        const newContext = {
+          props: {
+            post,
+          },
+        };
+        return createElement(PostItem, newContext);
+      });
+    },
+
   };
 </script>
-
-<style scoped>
-  .holder {
-
-  }
-</style>
