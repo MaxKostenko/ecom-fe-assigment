@@ -1,5 +1,7 @@
-<template functional>
-  <button :type="props.type" class="button"><slot></slot></button>
+<template>
+  <button :type="type" class="button">
+    <slot></slot>
+  </button>
 </template>
 
 <script>

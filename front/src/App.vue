@@ -12,16 +12,16 @@
 </template>
 
 <script>
-import EditForm from '@/components/EditForm';
-import BlogContent from '@/components/BlogContent';
+  import EditForm from '@/components/EditForm';
+  import BlogContent from '@/components/BlogContent';
 
-export default {
-  name: 'App',
-  components: {
-    EditForm,
-    BlogContent
+  export default {
+    name: 'App',
+    components: {
+      EditForm,
+      BlogContent
+    }
   }
-}
 </script>
 
 <style>

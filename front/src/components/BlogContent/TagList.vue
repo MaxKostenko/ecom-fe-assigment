@@ -15,7 +15,7 @@
 
 <script>
   export default {
-      name: 'tag-list'
+    name: 'tag-list'
   }
 </script>
 
@@ -24,7 +24,6 @@
     width: 100%;
     padding: 20px 20px 20px 0;
   }
-
 
   .list {
     border: 1px solid #444;

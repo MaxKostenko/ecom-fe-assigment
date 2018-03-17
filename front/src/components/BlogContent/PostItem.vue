@@ -1,35 +1,38 @@
 <template>
   <article class="holder">
-      <div class="time">12:45:05</div>
-      <h1>I am PostItem with very long title mf I am PostItem with very long title mf I am PostItem with very long title mf</h1>
-      <p>
+    <div class="time">12:45:05</div>
+    <h1>
+      I am PostItem with very long title mf I am PostItem with very long title mf I am PostItem with very long title mf</h1>
+    <p>
       <img width="100" height="100" src="https://dummyimage.com/300x300/3d113d/5ccca5.png&text=Hi"/>
       Some very interesting text dfsdfsd sdf sd fsdf sdfdsafsf adafdfasdfasdfasdfasfasdfasdfasdfasdfasd
 
-        d'sfs'd;f'sd;f'sd
+      d'sfs'd;f'sd;f'sd
 
-        ds;afl;'fas '
-        fsd'6666666
-        f 'dsaf;' afdfsd'f;ds'f;a<br/>
-        ds'fas
-        df ;ad
-        'sfdsfsdfddffdfdddddddddddddddddd dfsd'fd;s'fsd
-        sadf'
-        a;s'dfasdfdf fdfdfdfd
-          asd
-          fdsfddddddddddddddddddddddddddddddddds <br/>          fdsfddddddddddddddddddddddddddddddddds <br/>          fdsfddddddddddddddddddddddddddddddddds <br/>          fdsfddddddddddddddddddddddddddddddddds <br/>          fdsfddddddddddddddddddddddddddddddddds <br/>          fdsfddddddddddddddddddddddddddddddddds <br/>
-          asd
-          faasssssssssssssssfdsfsdf
-          sd
-          fasdfasdfasdf
-          asd
-          f
-          asd
-          f
-          as
-          df
-          as
-          dfasd444<br/>
+      ds;afl;'fas '
+      fsd'6666666
+      f 'dsaf;' afdfsd'f;ds'f;a<br/>
+      ds'fas
+      df ;ad
+      'sfdsfsdfddffdfdddddddddddddddddd dfsd'fd;s'fsd
+      sadf'
+      a;s'dfasdfdf fdfdfdfd
+      asd
+      fdsfddddddddddddddddddddddddddddddddds <br/> fdsfddddddddddddddddddddddddddddddddds <br/>
+      fdsfddddddddddddddddddddddddddddddddds <br/> fdsfddddddddddddddddddddddddddddddddds <br/>
+      fdsfddddddddddddddddddddddddddddddddds <br/> fdsfddddddddddddddddddddddddddddddddds <br/>
+      asd
+      faasssssssssssssssfdsfsdf
+      sd
+      fasdfasdfasdf
+      asd
+      f
+      asd
+      f
+      as
+      df
+      as
+      dfasd444<br/>
 
     </p>
   </article>

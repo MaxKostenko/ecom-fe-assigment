@@ -27,13 +27,16 @@
     display: inline-block;
     width: 100%;
   }
+
   .holder::after {
     clear: both;
   }
+
   .tags {
     float: right;
     width: 25%;
   }
+
   .posts {
     float: left;
     width: 75%;
@@ -43,6 +46,7 @@
     .tags {
       width: 100%;
     }
+
     .posts {
       width: 100%;
     }

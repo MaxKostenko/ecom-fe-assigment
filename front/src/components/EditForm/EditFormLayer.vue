@@ -2,12 +2,12 @@
   <div class="holder">
     <h3>New Blog Post</h3>
     <div class="form">
-        <div class="form-fields">
-          <slot name="fields"></slot>
-        </div>
-        <div class="form-action">
-          <slot name="action"></slot>
-        </div>
+      <div class="form-fields">
+        <slot name="fields"></slot>
+      </div>
+      <div class="form-action">
+        <slot name="action"></slot>
+      </div>
     </div>
   </div>
 </template>
@@ -42,14 +42,14 @@
   }
 
   @media (max-width: 1024px) {
-      .form-fields {
-          width: 100%;
-      }
+    .form-fields {
+      width: 100%;
+    }
 
-      .form-action {
-          width: 100%;
-          padding: 0;
-      }
+    .form-action {
+      width: 100%;
+      padding: 0;
+    }
 
   }
 

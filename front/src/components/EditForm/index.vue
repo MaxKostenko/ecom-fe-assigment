@@ -4,34 +4,36 @@
       <form-button type="submit" slot="action">Send Form</form-button>
       <template slot="fields">
         <form-field-holder-vuelidate
-            :validator="$v.title"
+          :validator="$v.title"
         >
           <input
-              v-model="title"
-              type="text"
-              placeholder="Input Title"
+            v-model="title"
+            type="text"
+            placeholder="Input Title"
           />
         </form-field-holder-vuelidate>
 
         <form-field-holder-vuelidate
-            :validator="$v.text"
+          :validator="$v.text"
         >
           <textarea
-              v-model="text"
-              placeholder="Input text"
+            v-model="text"
+            placeholder="Input text"
           ></textarea>
         </form-field-holder-vuelidate>
 
         <form-field-holder-vuelidate
-            :validator="$v.author"
+          :validator="$v.author"
         >
           <input
-              v-model="author"
-              type="text"
-              placeholder="Input author Email"
+            v-model="author"
+            type="text"
+            placeholder="Input author Email"
           />
         </form-field-holder-vuelidate>
-        <file-upload-field></file-upload-field>
+        <file-upload-field
+          v-model="image"
+        ></file-upload-field>
       </template>
     </edit-form-layer>
 
@@ -58,7 +60,8 @@
       return {
         title: '',
         text: '',
-        author: ''
+        author: '',
+        image: null
       }
     },
     validations: {
@@ -76,6 +79,11 @@
     methods: {
       sendForm() {
         this.$v.$touch();
+        if (!this.$v.$invalid) {
+          console.dir({
+            ...this.$data,
+          });
+        }
       }
     }
 
@@ -87,7 +95,12 @@
     border: 1px solid #676767;
     height: 35px;
     padding: 5px;
+    font-size: larger;
     width: 100%;
+  }
+
+  .hasError input, .hasError textarea {
+    border-color: red;
   }
 
   textarea {

@@ -13,7 +13,7 @@
 
   export default {
     name: 'post-item-list',
-    components: { PostItem },
+    components: {PostItem},
   };
 </script>
 
