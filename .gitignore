@@ -3,3 +3,6 @@
 vendor
 public/static
 public/index.html
+var/
+
+!.gitkeep
