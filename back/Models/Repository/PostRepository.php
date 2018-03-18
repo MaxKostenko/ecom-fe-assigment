@@ -5,7 +5,7 @@ namespace Models\Repository;
 use Models\Entity\Post;
 use Models\Store\StoreInterface;
 
-class PostRepository
+class PostRepository extends BaseRepository
 {
     const STORE_KEY = 'posts';
     protected $store;
@@ -23,14 +23,11 @@ class PostRepository
         $this->tagRepository->addTagByText($post->getText());
 
         $postList = $this->getList();
-        array_push($postList, $post->getAttributes());
-        $this->store->setData(static::STORE_KEY, $postList);
+        $postData = $post->getAttributes();
+        array_push($postList, $postData);
+        $this->setList($postList);
+        return $postData;
     }
-
-    public function getList() {
-        return $this->store->getData(static::STORE_KEY) ?: [];
-    }
-
 
 }
 

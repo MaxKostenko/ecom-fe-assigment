@@ -86,6 +86,7 @@
             '/api',
             {...this.$data}
           ).then((response) => {
+
             alert('done');
           });
         }

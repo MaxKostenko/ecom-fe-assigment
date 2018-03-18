@@ -25,7 +25,7 @@ class JsonStore implements StoreInterface {
         if(file_exists($path)) {
             $content = file_get_contents($path);
             try {
-                return json_decode($content);
+                return json_decode($content, true);
             } catch (\Exception $e) {
 
             }

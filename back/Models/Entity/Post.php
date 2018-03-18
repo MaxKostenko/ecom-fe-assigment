@@ -22,7 +22,17 @@ class Post extends AbstractEntity
     /**
      * @var string
      */
+    private $time;
+
+    /**
+     * @var string
+     */
     private $image;
+
+    function __construct()
+    {
+        $this->time = date('d-m-Y H:i:s');
+    }
 
     /**
      * @return string
@@ -70,6 +80,22 @@ class Post extends AbstractEntity
     public function setAuthor($author)
     {
         $this->author = $author;
+    }
+
+    /**
+     * @return string
+     */
+    public function getTime()
+    {
+        return $this->time;
+    }
+
+    /**
+     * @param string $time
+     */
+    public function setTime($time)
+    {
+        $this->time = $time;
     }
 
     /**
