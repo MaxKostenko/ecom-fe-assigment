@@ -3,7 +3,7 @@
     <div class="list">
       <h4>Most used words here</h4>
       <ul>
-        <li v-for="tag in tags.list" :key="tag">{{ tag }}</li>
+        <li v-for="tag in tags" :key="tag">{{ tag }}</li>
       </ul>
     </div>
   </div>
@@ -14,7 +14,7 @@
     name: 'tag-list',
     props: {
       tags: {
-        type: Object,
+        type: Array,
         required: true
       }
     }

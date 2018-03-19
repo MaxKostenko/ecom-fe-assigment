@@ -1,12 +1,16 @@
 <template>
   <div class="holder">
-    <div v-if="!posts.isLoading">
+    <div v-if="!isLoading">
       <div class="tags">
         <tag-list :tags="tags"></tag-list>
       </div>
       <div class="posts">
         <div class="holder">
-          <post-item-list :posts="posts.list"></post-item-list>
+          <post-item
+            v-for="post in posts"
+            :post="post"
+            :key="post.time"
+          ></post-item>
         </div>
       </div>
     </div>
@@ -15,50 +19,31 @@
 </template>
 
 <script>
-  import PostItemList from '@/components/BlogContent/PostItemList';
+  import PostItem from '@/components/BlogContent/PostItem';
   import TagList from '@/components/BlogContent/TagList';
   import Loader from '@/components/base/Loader';
 
   export default {
     name: 'blog-content',
     components: {
-      PostItemList,
+      PostItem,
       TagList,
       Loader,
     },
-    data() {
-      return {
-        posts: {
-          list: [],
-          isLoading: true
-        },
-        tags: {
-          list: [],
-          isLoading: true
-        },
-      }
+    props: {
+      tags: {
+        type: Array,
+        required: true,
+      },
+      posts: {
+        type: Array,
+        required: true,
+      },
+      isLoading: {
+        type: Boolean,
+        required: true,
+      },
     },
-    mounted() {
-      this.posts.isLoading = true;
-      this.tags.isLoading = true;
-      fetch('/api')
-        .then(response => response.json())
-        .then((response) => {
-          if (response.tags && response.posts) {
-            this.posts = {
-              list: response.posts,
-              isLoading: false
-            };
-            this.tags = {
-              list: response.tags,
-              isLoading: false
-            };
-          }
-        })
-        .catch((error) => {
-          alert(error || 'Something is going wrong');
-        })
-    }
   };
 </script>
 

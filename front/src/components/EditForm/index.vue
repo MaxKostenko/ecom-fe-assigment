@@ -36,7 +36,6 @@
         ></file-upload-field>
       </template>
     </edit-form-layer>
-
   </form>
 </template>
 
@@ -82,14 +81,21 @@
       sendForm() {
         this.$v.$touch();
         if (!this.$v.$invalid) {
-          SendForm(
-            '/api',
-            {...this.$data}
-          ).then((response) => {
-
-            alert('done');
-          });
+          SendForm('/api', {...this.$data})
+            .then(response => JSON.parse(response))
+            .then((response) => {
+              this.$emit('addPost', response.post);
+              this.$emit('updateTags', response.tags);
+              this.reset();
+              this.$v.$reset();
+            });
         }
+      },
+      reset() {
+        const keys = Object.keys({...this.$data});
+        keys.forEach((key) => {
+          this[key] = null;
+        })
       }
     }
 

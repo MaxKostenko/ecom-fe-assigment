@@ -5,8 +5,15 @@
       <p>A totally false statement</p>
     </header>
     <section>
-      <edit-form></edit-form>
-      <blog-content></blog-content>
+      <edit-form
+        @addPost="addPost"
+        @updateTags="updateTags"
+      ></edit-form>
+      <blog-content
+        :posts="posts"
+        :tags="tags"
+        :isLoading="isLoading"
+      ></blog-content>
     </section>
   </div>
 </template>
@@ -17,10 +24,42 @@
 
   export default {
     name: 'App',
+    data() {
+      return {
+        posts: [],
+        tags: [],
+        isLoading: true
+      }
+    },
     components: {
       EditForm,
       BlogContent
+    },
+    mounted() {
+      fetch('/api')
+        .then(response => response.json())
+        .then((response) => {
+          if (response.tags && response.posts) {
+            this.posts = response.posts;
+            this.tags = response.tags;
+            this.isLoading = false;
+          } else {
+              new Error('Ooops');
+          }
+        })
+        .catch((error) => {
+          alert(error || 'Something is going wrong');
+        })
+    },
+    methods: {
+      addPost(post) {
+        this.posts.unshift(post);
+      },
+      updateTags(tags) {
+        this.tags = tags;
+      }
     }
+
   }
 </script>
 
