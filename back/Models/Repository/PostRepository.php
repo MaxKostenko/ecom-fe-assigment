@@ -24,7 +24,7 @@ class PostRepository extends BaseRepository
 
         $postList = $this->getList();
         $postData = $post->getAttributes();
-        array_push($postList, $postData);
+        array_unshift($postList, $postData);
         $this->setList($postList);
         return $postData;
     }
