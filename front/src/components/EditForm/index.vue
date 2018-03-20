@@ -84,10 +84,12 @@
           SendForm('/api', {...this.$data})
             .then(response => JSON.parse(response))
             .then((response) => {
-              this.$emit('addPost', response.post);
-              this.$emit('updateTags', response.tags);
-              this.reset();
-              this.$v.$reset();
+              if(response.success) {
+                this.$emit('addPost', response.post);
+                this.$emit('updateTags', response.tags);
+                this.reset();
+                this.$v.$reset();
+              }
             });
         }
       },

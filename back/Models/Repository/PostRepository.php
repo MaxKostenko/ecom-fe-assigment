@@ -4,6 +4,7 @@ namespace Models\Repository;
 
 use Models\Entity\Post;
 use Models\Store\StoreInterface;
+use Models\Validation\EntityValidator;
 
 class PostRepository extends BaseRepository
 {
@@ -13,21 +14,35 @@ class PostRepository extends BaseRepository
 
     public function __construct(StoreInterface $store, TagRepository $tagRepository)
     {
-        $this->store = $store;
+        $this->store         = $store;
         $this->tagRepository = $tagRepository;
     }
 
-    public function addPost($data) {
+    public function addPost($data)
+    {
         $post = new Post();
         $post->setAttributes($data);
-        $this->tagRepository->addTagByText($post->getText());
+        $validator = new EntityValidator();
+        $schema    = require __DIR__ . '/../Entity/PostValidationSchema.php';
 
-        $postList = $this->getList();
-        $postData = $post->getAttributes();
-        array_unshift($postList, $postData);
-        $this->setList($postList);
-        return $postData;
+        if($validator->checkEntity($post, $schema))
+        {
+            $this->tagRepository->addTagByText($post->getText());
+            $postList = $this->getList();
+            $postData = $post->getAttributes();
+            array_unshift($postList, $postData);
+            $this->setList($postList);
+
+            return [
+                'success' => true,
+                'post' => $postData,
+                'tags' => $this->tagRepository->getTop()
+            ];
+        }
+        return [
+            'success' => false,
+            'errors' => $validator->getErrorList()
+        ];
     }
-
 }
 

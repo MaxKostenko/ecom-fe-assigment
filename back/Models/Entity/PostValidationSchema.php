@@ -1,14 +1,19 @@
 <?php
+use Models\Validation\Validators\RequiredValidator;
+use Models\Validation\Validators\EmailValidator;
+use Models\Validation\Validators\EnumValidator;
+
 return [
     'title' => [
-        'required',
+        RequiredValidator::class,
     ],
     'text' => [
-        'required',
+        RequiredValidator::class,
     ],
     'author' => [
-        'required',
-        'enum' => [
+        RequiredValidator::class,
+        EmailValidator::class,
+        EnumValidator::class => [
             'admin@fake-blog.com',
             'fake-user@fake-blog.com'
         ]
