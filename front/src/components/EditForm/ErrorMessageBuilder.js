@@ -9,7 +9,9 @@ export default {
     if (vuelidate.$dirty) {
       if (vuelidate.$invalid) {
         const invalidRule = Object.keys(vuelidate.$params).find(key => !vuelidate[key]);
-        return this.messages[invalidRule] || this.messages.default;
+        return vuelidate.$params[invalidRule][`${invalidRule}ErrorText`]
+            || this.messages[invalidRule]
+            || this.messages.default;
       }
     }
     return null;

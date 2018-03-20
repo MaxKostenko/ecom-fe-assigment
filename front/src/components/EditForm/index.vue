@@ -4,35 +4,36 @@
       <form-button type="submit" slot="action">Send Form</form-button>
       <template slot="fields">
         <form-field-holder-vuelidate
-          :validator="$v.title"
+          :validator="$v.form.title"
         >
           <input
-            v-model="title"
+            v-model="form.title"
             type="text"
             placeholder="Input Title"
           />
         </form-field-holder-vuelidate>
 
         <form-field-holder-vuelidate
-          :validator="$v.text"
+          :validator="$v.form.text"
         >
           <textarea
-            v-model="text"
+            v-model="form.text"
             placeholder="Input text"
           ></textarea>
         </form-field-holder-vuelidate>
 
         <form-field-holder-vuelidate
-          :validator="$v.author"
+          :validator="$v.form.author"
         >
           <input
-            v-model="author"
+            v-model="form.author"
             type="text"
             placeholder="Input author Email"
           />
+          <small>Only 'admin@fake-blog.com' and 'fake-user@fake-blog.com' are allowed</small>
         </form-field-holder-vuelidate>
         <file-upload-field
-          v-model="image"
+          v-model="form.image"
         ></file-upload-field>
       </template>
     </edit-form-layer>
@@ -46,6 +47,7 @@
   import EditFormLayer from '@/components/EditForm/EditFormLayer';
   import {validationMixin} from 'vuelidate';
   import {required, email} from 'vuelidate/lib/validators';
+  import {withParams} from 'vuelidate/lib/validators/common';
   import SendForm from '@/components/base/SendForm';
 
   export default {
@@ -59,45 +61,62 @@
     },
     data() {
       return {
-        title: '',
-        text: '',
-        author: '',
-        image: null
+        form:{
+          title: '',
+          text: '',
+          author: '',
+          image: null
+        },
+        serverCheckErrors: {
+          author: ''
+        }
       }
     },
-    validations: {
-      title: {
-        required,
-      },
-      text: {
-        required,
-      },
-      author: {
-        required,
-        email,
+    validations() {
+      return {
+        form: {
+          title: {
+            required,
+          },
+          text: {
+            required,
+          },
+          author: {
+            required,
+            email,
+            serverCheck: withParams(
+              { serverCheckErrorText: this.serverCheckErrors.author },
+              value => !this.serverCheckErrors.author
+            )
+          }
+        }
       }
     },
     methods: {
       sendForm() {
-        this.$v.$touch();
-        if (!this.$v.$invalid) {
-          SendForm('/api', {...this.$data})
+        this.serverCheckErrors.author = '';
+        this.$v.form.$touch();
+        if (!this.$v.form.$invalid) {
+          SendForm('/api', {...this.form})
             .then(response => JSON.parse(response))
             .then((response) => {
               if(response.success) {
                 this.$emit('addPost', response.post);
                 this.$emit('updateTags', response.tags);
                 this.reset();
-                this.$v.$reset();
+                this.$v.form.$reset();
+              } else {
+                this.serverCheckErrors = response.errors;
               }
             });
         }
       },
       reset() {
-        const keys = Object.keys({...this.$data});
+        const keys = Object.keys({...this.form});
+
         keys.forEach((key) => {
-          this[key] = null;
-        })
+          this.form[key] = null;
+        });
       }
     }
 
