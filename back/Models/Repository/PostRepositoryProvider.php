@@ -19,7 +19,11 @@ class PostRepositoryProvider implements ServiceProviderInterface
     public function register(Container $pimple)
     {
         $pimple['post'] = function (ContainerInterface $c) {
-            return new PostRepository($c->get('store'), $c->get('tag'));
+            return new PostRepository(
+                $c->get('store'),
+                $c->get('tag'),
+                $c->get('imageStorage')
+            );
         };
     }
 }

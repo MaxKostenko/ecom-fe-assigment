@@ -9,6 +9,9 @@ return [
                 'filesPath' => __DIR__ . '/../../var/'
             ]
         ],
+        'imageStorage' => [
+            'destinationDir' => __DIR__ . '/../../public/static/images'
+        ],
         'displayErrorDetails' => true,
     ]
 ];
