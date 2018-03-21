@@ -1,3 +1,11 @@
+function getCookie(name) {
+    var matches = document.cookie.match(new RegExp(
+        "(?:^|; )" + name.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, '\\$1') + "=([^;]*)"
+    ));
+    return matches ? decodeURIComponent(matches[1]) : undefined;
+}
+
+
 export default function sendFormPromise(url, data, onPercentageProgress = null) {
   return new Promise((resolve, reject) => {
     const XHR = new XMLHttpRequest();
@@ -28,6 +36,9 @@ export default function sendFormPromise(url, data, onPercentageProgress = null) 
 
     // Set up our request
     XHR.open('POST', url);
+
+    const csrf = getCookie('CSRF-Token');
+    XHR.setRequestHeader('X-CSRF-Token', csrf);
 
     // Send our FormData object; HTTP headers are set automatically
     XHR.send(FD);
