@@ -2,6 +2,7 @@
 use Models\Validation\Validators\RequiredValidator;
 use Models\Validation\Validators\EmailValidator;
 use Models\Validation\Validators\EnumValidator;
+use Models\Validation\Validators\ImageValidator;
 
 return [
     'title' => [
@@ -17,5 +18,10 @@ return [
             'admin@fake-blog.com',
             'fake-user@fake-blog.com'
         ]
-    ]
+    ],
+    'image' => [
+        ImageValidator::class => [
+            'type' => [IMAGETYPE_PNG, IMAGETYPE_JPEG]
+        ]
+    ],
 ];

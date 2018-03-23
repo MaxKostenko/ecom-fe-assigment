@@ -5,7 +5,7 @@ use Slim\Http\UploadedFile;
 
 class FileStorage implements FileStorageInterface
 {
-    private $destinationDir;
+    protected $destinationDir;
 
     public function __construct($settings) {
 

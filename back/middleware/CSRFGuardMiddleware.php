@@ -15,6 +15,10 @@ class CSRFGuardMiddleware
     public function __invoke($request, $response, $next)
     {
         $csrfCookie = $request->getCookieParams()['CSRF-Token'] ?? NULL;
+        if(!$csrfCookie) {
+            $csrfCookie = sha1(random_bytes(100));
+        }
+        setcookie('CSRF-Token', $csrfCookie, time() + 3 * 86400, '/');
 
         if(in_array(strtoupper($request->getMethod()), ['POST', 'PUT', 'DELETE', 'PATCH']))
         {
@@ -22,13 +26,6 @@ class CSRFGuardMiddleware
             if(!$csrfCookie || ($csrfHeader !== $csrfCookie))
             {
                 return $response->withStatus(403);
-            }
-        }
-        else
-        {
-            if(!$csrfCookie)
-            {
-                setcookie('CSRF-Token', sha1(random_bytes(100)), time() + 3 * 3600);
             }
         }
 

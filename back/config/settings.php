@@ -10,7 +10,7 @@ return [
             ]
         ],
         'imageStorage' => [
-            'destinationDir' => __DIR__ . '/../../public/static/images'
+            'destinationDir' => __DIR__ . '/../../public/images'
         ],
         'displayErrorDetails' => true,
     ]

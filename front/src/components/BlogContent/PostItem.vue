@@ -3,7 +3,7 @@
     <div class="time">{{ post.time }}</div>
     <h1>{{ post.title }}</h1>
     <p>
-      <img width="100" height="100" src="https://dummyimage.com/300x300/3d113d/5ccca5.png&text=Hi"/>
+      <img v-if="post.image!='null'" width="100" height="100" :src="imageUrl"/>
       {{ post.text }}
     </p>
   </article>
@@ -17,6 +17,11 @@
         type: Object,
         required: true
       }
+    },
+    computed: {
+        imageUrl() {
+            return `/images/${this.post.image}`;
+        }
     }
   }
 </script>

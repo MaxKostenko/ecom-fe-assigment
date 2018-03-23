@@ -5,8 +5,7 @@ use Slim\Http\Response;
 
 $app->post('/api', function (Request $request, Response $response, array $args) {
     $params = $request->getParsedBody();
-    $image =  $request->getUploadedFiles()[0] ?? NULL;
-
+    $image =  ($request->getUploadedFiles())['image'] ?? NULL;
     return $response->withJson($this->get('post')->addPost($params, $image));
 }
 );

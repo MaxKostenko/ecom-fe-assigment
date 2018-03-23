@@ -21,9 +21,9 @@ class PostRepository extends BaseRepository
         ImageStorage $imageStorage
     )
     {
-        $this->store         = $store;
+        $this->store = $store;
         $this->tagRepository = $tagRepository;
-        $this->imageStorage  = $imageStorage;
+        $this->imageStorage = $imageStorage;
     }
 
     public function addPost($data, UploadedFile $image = null)
@@ -31,20 +31,17 @@ class PostRepository extends BaseRepository
         $post = new Post();
         $post->setAttributes($data);
 
-        if($image)
-        {
-            $imageFilename = $this->imageStorage->addFile($image);
-            if($imageFilename)
-            {
-                $post->setImage($imageFilename);
-            }
+        if ($image) {
+            $post->setImage($image);
         }
 
         $validator = new EntityValidator();
-        $schema    = require __DIR__ . '/../Entity/PostValidationSchema.php';
+        $schema = require __DIR__ . '/../Entity/PostValidationSchema.php';
 
-        if($validator->checkEntity($post, $schema))
-        {
+        if ($validator->checkEntity($post, $schema)) {
+            if($image) {
+                $post->setImage($this->imageStorage->addFile($image));
+            }
             $this->tagRepository->addTagByText($post->getText());
             $postList = $this->getList();
             $postData = $post->getAttributes();
@@ -53,14 +50,14 @@ class PostRepository extends BaseRepository
 
             return [
                 'success' => true,
-                'post'    => $postData,
-                'tags'    => $this->tagRepository->getTop()
+                'post' => $postData,
+                'tags' => $this->tagRepository->getTop()
             ];
         }
 
         return [
             'success' => false,
-            'errors'  => $validator->getErrorList()
+            'errors' => $validator->getErrorList()
         ];
     }
 }
