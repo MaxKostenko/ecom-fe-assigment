@@ -21,7 +21,7 @@
 <script>
   import PostItem from '@/components/BlogContent/PostItem';
   import TagList from '@/components/BlogContent/TagList';
-  import Loader from '@/components/base/Loader';
+  import Loader from '@/components/BlogContent/Loader';
 
   export default {
     name: 'blog-content',

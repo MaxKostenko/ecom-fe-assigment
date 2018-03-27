@@ -93,6 +93,10 @@
     }
   }
 
+  section {
+    padding: 0 20px;
+  }
+
   header {
     height: 200px;
     text-align: center;

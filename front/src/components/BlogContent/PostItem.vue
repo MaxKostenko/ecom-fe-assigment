@@ -30,7 +30,7 @@
   .a-holder {
     border: 1px solid #444;
     border-radius: 10px;
-    margin: 20px;
+    margin: 20px 20px 20px 0;
     padding: 10px 20px;
   }
 

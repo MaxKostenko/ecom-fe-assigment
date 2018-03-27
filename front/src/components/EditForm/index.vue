@@ -1,48 +1,51 @@
 <template>
-  <form action="#" @submit.stop.prevent="sendForm">
-    <edit-form-layer>
-      <form-button type="submit" slot="action">Send Form</form-button>
-      <template slot="fields">
-        <form-field-holder-vuelidate
-          :validator="$v.form.title"
-        >
-          <input
-            v-model="form.title"
-            type="text"
-            placeholder="Input Title"
-          />
-        </form-field-holder-vuelidate>
+  <block-loader :isLoading="isLoading">
+    <form action="#" @submit.stop.prevent="sendForm">
+      <edit-form-layer>
+        <form-button type="submit" slot="action">Send Form</form-button>
+        <template slot="fields">
+          <form-field-holder-vuelidate
+            :validator="$v.form.title"
+          >
+            <input
+              v-model="form.title"
+              type="text"
+              placeholder="Input Title"
+            />
+          </form-field-holder-vuelidate>
 
-        <form-field-holder-vuelidate
-          :validator="$v.form.text"
-        >
+          <form-field-holder-vuelidate
+            :validator="$v.form.text"
+          >
           <textarea
             v-model="form.text"
             placeholder="Input text"
           ></textarea>
-        </form-field-holder-vuelidate>
+          </form-field-holder-vuelidate>
 
-        <form-field-holder-vuelidate
-          :validator="$v.form.author"
-        >
-          <input
-            v-model="form.author"
-            type="text"
-            placeholder="Input author Email"
-          />
-          <small>Only 'admin@fake-blog.com' and 'fake-user@fake-blog.com' are allowed</small>
-        </form-field-holder-vuelidate>
-        <file-upload-field
-          v-model="form.image"
-        ></file-upload-field>
-      </template>
-    </edit-form-layer>
-  </form>
+          <form-field-holder-vuelidate
+            :validator="$v.form.author"
+          >
+            <input
+              v-model="form.author"
+              type="text"
+              placeholder="Input author Email"
+            />
+            <small>Only 'admin@fake-blog.com' and 'fake-user@fake-blog.com' are allowed</small>
+          </form-field-holder-vuelidate>
+          <file-upload-field
+            v-model="form.image"
+          ></file-upload-field>
+        </template>
+      </edit-form-layer>
+    </form>
+  </block-loader>
 </template>
 
 <script>
   import FormFieldHolderVuelidate from '@/components/EditForm/FormFieldHolderVuelidate';
   import FormButton from '@/components/base/FormButton';
+  import BlockLoader from '@/components/base/BlockLoader';
   import FileUploadField from '@/components/EditForm/FileUploadField';
   import EditFormLayer from '@/components/EditForm/EditFormLayer';
   import {validationMixin} from 'vuelidate';
@@ -58,10 +61,11 @@
       FormButton,
       EditFormLayer,
       FileUploadField,
+      BlockLoader,
     },
     data() {
       return {
-        form:{
+        form: {
           title: '',
           text: '',
           author: '',
@@ -69,7 +73,8 @@
         },
         serverCheckErrors: {
           author: ''
-        }
+        },
+        isLoading: false
       }
     },
     validations() {
@@ -85,7 +90,7 @@
             required,
             email,
             serverCheck: withParams(
-              { serverCheckErrorText: this.serverCheckErrors.author },
+              {serverCheckErrorText: this.serverCheckErrors.author},
               value => !this.serverCheckErrors.author
             )
           }
@@ -97,10 +102,16 @@
         this.serverCheckErrors.author = '';
         this.$v.form.$touch();
         if (!this.$v.form.$invalid) {
+
+          this.isLoading = true;
+
           SendForm('/api', {...this.form})
             .then(response => JSON.parse(response))
             .then((response) => {
-              if(response.success) {
+
+              this.isLoading = false;
+
+              if (response.success) {
                 this.$emit('addPost', response.post);
                 this.$emit('updateTags', response.tags);
                 this.reset();
