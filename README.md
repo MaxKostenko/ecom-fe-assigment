@@ -1,3 +1,73 @@
+About solution
+==================
+
+#### Backend
+Backend part was build with Slim Framework.
+
+* Project can be installed with composer.  
+``` bash
+git clone git@github.com:MaxKostenko/ecom-fe-assigment.git
+php composer.phar install
+```
+
+* Directories in the list have to be writable from PHP side:
+``` bash
+var
+public
+public/images
+```
+* Entry point has to be configured to dir "public"
+* mod_rewrite has to be enabled
+
+####Frontend
+
+Frontend part was build with VueJS.
+
+* It's require nodejs >=6.0.0 and npm >= 3.0.0 
+``` bash
+cd front
+npm install
+```
+* It possible to make release build
+``` bash
+npm run build
+```
+or developer build with nodejs webserver
+``` bash
+npm run dev
+``` 
+* Website is ready if you made release build. 
+
+
+* For using FrontEnd in dev mode you need to setup local URL of backend
+``` bash
+file: front/config/index.js
+#==========================#
+
+
+const path = require('path')
+
+const apiDomain = 'http://fake-blog.loc/';
+
+module.exports = {
+  dev: {
+
+    // Paths
+    assetsSubDirectory: 'static',
+    assetsPublicPath: '/',
+    proxyTable: {
+      '**': {
+        target: apiDomain,
+        changeOrigin: true,
+      },
+    },
+
+
+```
+ 
+ 
+ 
+
 Full Stack Developer Assignment
 ==================
 
