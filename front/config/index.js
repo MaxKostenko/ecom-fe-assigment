@@ -4,6 +4,8 @@
 
 const path = require('path')
 
+const apiDomain = 'http://fake-blog.loc/';
+
 module.exports = {
   dev: {
 
@@ -11,13 +13,10 @@ module.exports = {
     assetsSubDirectory: 'static',
     assetsPublicPath: '/',
     proxyTable: {
-      '/api': {
-        target: 'http://slim.loc/',
+      '**': {
+        target: apiDomain,
         changeOrigin: true,
-        pathRewrite: {
-          '^/api': '/api'
-        }
-      }
+      },
     },
 
     // Various Dev Server settings

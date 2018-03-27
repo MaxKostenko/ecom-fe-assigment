@@ -3,7 +3,7 @@
     <div class="time">{{ post.time }}</div>
     <h1>{{ post.title }}</h1>
     <p>
-      <img v-if="post.image!='null'" width="100" height="100" :src="imageUrl"/>
+      <img v-if="post.image!='null'" :src="imageUrl"/>
       {{ post.text }}
     </p>
   </article>
@@ -38,7 +38,6 @@
     display: inline-block;
     float: left;
     width: 100%;
-    margin-right: 100px;
     padding-right: 100px;
     padding-bottom: 20px;
   }

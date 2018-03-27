@@ -1,8 +1,8 @@
 <template>
   <div class="holder">
     <div class="link-holder">
-      <template v-if="filename">
-        {{ filename }}
+      <template v-if="value">
+        {{ value.name }}
         <a href="#" @click.stop.prevent="resetInput">(x remove image)</a>
       </template>
       <span v-else @click="openFileDialog">Please select file</span>
@@ -23,30 +23,34 @@
     components: {
       FormButton
     },
-    data() {
-      return {
-        filename: null
-      };
+    props: {
+        value: {
+          type: File
+        }
+    },
+    updated() {
+      if(!this.value) {
+        this.resetInput();
+      }
     },
     methods: {
       fileSelected(e) {
         const files = e.target.files;
-        if(files && files.length) {
-          this.filename = files[0].name;
+        if(files.length) {
           this.$emit('input', files[0]);
         }
       },
       openFileDialog(e) {
         this.$refs.field.click();
       },
-      resetInput(e) {
+      resetInput() {
         this.$refs.field.value = null;
-        this.filename = null;
+        this.$emit('input', null);
       }
     },
     computed: {
       uploadButtonText() {
-        return this.filename ? 'Change Image' : 'Upload Image';
+        return this.value ? 'Change Image' : 'Choose Image';
       }
     }
 
